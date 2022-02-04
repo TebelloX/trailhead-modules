@@ -6,3 +6,17 @@ trigger TriggerName on ObjectName (trigger_events) {
 trigger HelloWorldTrigger on Account (before insert) {
 	System.debug('Hello World!');
 }
+
+// Some other context variables return a Boolean value to indicate whether the trigger was fired due to an update or some other event. These variables are useful when a trigger combines multiple events. For example:
+trigger ContextExampleTrigger on Account (before insert, after insert, after delete) {
+    if (Trigger.isInsert) {
+        if (Trigger.isBefore) {
+            // Process before insert
+        } else if (Trigger.isAfter) {
+            // Process after insert
+        }        
+    }
+    else if (Trigger.isDelete) {
+        // Process after delete
+    }
+}
